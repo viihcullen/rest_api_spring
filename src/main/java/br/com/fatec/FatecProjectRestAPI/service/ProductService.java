@@ -43,6 +43,11 @@ public class ProductService {
         return result;
     }
 
+    public Optional<Product> findProductById(Long idProduct){
+        return Optional.ofNullable(productRepository.findById(idProduct).orElseThrow(()
+        -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!")));
+    }
+
     public Boolean validateProduct(Product product){
         return (product.getAmountProduct().compareTo(BigDecimal.valueOf(0)) > 0 && product.getCostPriceProduct().compareTo(BigDecimal.valueOf(0)) > 0);
     }
