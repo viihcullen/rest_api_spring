@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/v1/product")
@@ -35,16 +34,4 @@ public class ProductController {
         HashMap<String, Object> result = productService.deleteProduct(idProduct);
         return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
     }
-
-    @GetMapping(value = "/findProduct/{idProduct}")
-    public ResponseEntity<Object> getProductById(@PathVariable Long idProduct){
-        Optional<Product> result = productService.findProductById(idProduct);
-        return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
-    }
-
-    @GetMapping(value = "/update")
-    public ResponseEntity<Object> updateProduct(@RequestBody Product product){
-        Product result = productService.updateProduct(product);
-        return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
-    }
- }
+}

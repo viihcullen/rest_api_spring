@@ -43,23 +43,6 @@ public class ProductService {
         return result;
     }
 
-    public Optional<Product> findProductById(Long idProduct){
-        return Optional.ofNullable(productRepository.findById(idProduct).orElseThrow(()
-        -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!")));
-    }
-    public Product updateProduct(Product product) {
-        if (validateProduct(product)) {
-            if (findProductById(product.getIdProduct()) != null) {
-                return productRepository.saveAndFlush(product);
-            }else {
-                return null;
-            }
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Problemas ao alterar cliente, a renda salarial deve ser maior ou igual 0!");
-        }
-    }
-
     public Boolean validateProduct(Product product){
         return (product.getAmountProduct().compareTo(BigDecimal.valueOf(0)) > 0 && product.getCostPriceProduct().compareTo(BigDecimal.valueOf(0)) > 0);
     }
