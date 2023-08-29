@@ -6,9 +6,7 @@ import br.com.fatec.FatecProjectRestAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,11 @@ public class ProductController {
     public ResponseEntity<Object> list(){
         List<Product> result = productService.getInfoProducts();
         return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<Object> saveProduct(@RequestBody Product product){
+        Product result = productService.saveProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseGenericException.response(result));
     }
 }
