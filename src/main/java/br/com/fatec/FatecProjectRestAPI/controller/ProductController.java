@@ -41,4 +41,10 @@ public class ProductController {
         Optional<Product> result = productService.findProductById(idProduct);
         return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
     }
-}
+
+    @GetMapping(value = "/update")
+    public ResponseEntity<Object> updateProduct(@RequestBody Product product){
+        Product result = productService.updateProduct(product);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseGenericException.response(result));
+    }
+ }
